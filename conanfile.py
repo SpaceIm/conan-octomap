@@ -42,7 +42,8 @@ class OctomapConan(ConanFile):
 
     def build(self):
         tools.replace_in_file(os.path.join(self._source_subfolder, "octomap","CMakeLists.txt"),
-                              "${CMAKE_SOURCE_DIR}", "${CMAKE_CURRENT_SOURCE_DIR}")
+                              "SET( BASE_DIR ${CMAKE_SOURCE_DIR} )",
+                              "SET( BASE_DIR ${CMAKE_BINARY_DIR} )")
         cmake = CMake(self)
         cmake.definitions["OCTOMAP_OMP"] = self.options.openmp
         cmake.configure(build_folder=self._build_subfolder)
@@ -51,8 +52,8 @@ class OctomapConan(ConanFile):
     def package(self):
         self.copy("LICENSE.txt", dst="licenses", src=os.path.join(self._source_subfolder, "octomap"))
         source_include_dir = os.path.join(self._source_subfolder, "octomap", "include")
-        build_lib_dir = os.path.join(self._source_subfolder, "octomap", "lib")
-        build_bin_dir = os.path.join(self._source_subfolder, "octomap", "bin")
+        build_lib_dir = os.path.join(self._build_subfolder, "lib")
+        build_bin_dir = os.path.join(self._build_subfolder, "bin")
         self.copy(pattern="*.h", dst="include", src=source_include_dir)
         self.copy(pattern="*.hxx", dst="include", src=source_include_dir)
         self.copy(pattern="*.a", dst="lib", src=build_lib_dir, keep_path=False)
