@@ -6,13 +6,12 @@ class OctomapConan(ConanFile):
     name = "octomap"
     description = "An Efficient Probabilistic 3D Mapping Framework Based on Octrees."
     license = "BSD-3-Clause"
-    topics = ("conan", "octomap", "octree", "3d")
+    topics = ("conan", "octomap", "octree", "3d", "robotics")
     homepage = "https://github.com/OctoMap/octomap"
     url = "https://github.com/conan-io/conan-center-index"
     exports_sources = "CMakeLists.txt"
     generators = "cmake"
     settings = "os", "arch", "compiler", "build_type"
-    short_paths = True
     options = {
         "shared": [True, False],
         "fPIC": [True, False],
