@@ -68,6 +68,8 @@ class OctomapConan(ConanFile):
         self.copy(pattern="*.dll", dst="bin", src=build_bin_dir, keep_path=False)
 
     def package_info(self):
+        # TODO: CMake exported targets: octomap and octomath (or octomap-static and octomath-static) without namespace
+        self.cpp_info.names["pkg_config"] = "octomap"
         self.cpp_info.libs = ["octomap", "octomath"]
         if self.settings.os == "Linux":
             self.cpp_info.system_libs.append("m")
