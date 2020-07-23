@@ -2,3 +2,6 @@ sources:
   "1.9.1":
     url: "https://github.com/OctoMap/octomap/archive/v1.9.1.tar.gz"
     sha256: "9abce615d9f3f97a15ba129a10e3a01f9bef9aad178f2ef398f9a925f793c7b9"
+  "1.9.5":
+    url: "https://github.com/OctoMap/octomap/archive/v1.9.5.tar.gz"
+    sha256: "adf87320c4c830c0fd85fe8d913d8aa174e2f72d0ea64c917599a50a561092b6"
