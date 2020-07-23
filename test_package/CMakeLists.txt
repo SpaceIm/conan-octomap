@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.11)
+cmake_minimum_required(VERSION 3.1)
 project(test_package)
 
 set(CMAKE_VERBOSE_MAKEFILE TRUE)
@@ -6,5 +6,12 @@ set(CMAKE_VERBOSE_MAKEFILE TRUE)
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
+find_package(octomap REQUIRED)
+
 add_executable(${PROJECT_NAME} test_package.cpp)
-target_link_libraries(${PROJECT_NAME} ${CONAN_LIBS})
+# TODO: no namespace
+if(OCTOMAP_SHARED)
+  target_link_libraries(${PROJECT_NAME} octomap::octomap octomap::octomath)
+else()
+  target_link_libraries(${PROJECT_NAME} octomap::octomap-static octomap::octomath-static)
+endif()
